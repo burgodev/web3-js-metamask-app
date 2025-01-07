@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { getMetaMaskProvider, getBalance } from "./metamask/metaMaskService";
+import {
+  getMetaMaskProvider,
+  getBalance,
+  transfer,
+} from "./metamask/metaMaskService";
 
 export default function Home() {
   const [message, setMessage] = useState("");
@@ -9,6 +13,14 @@ export default function Home() {
   const handleGetBalance = async () => {
     const balance = await getBalance();
     setMessage(balance.toString());
+  };
+
+  const handleTransfer = async () => {
+    const transferMessage = await transfer(
+      "0xbcbf7fda3ef5dc7aff7ed77ec903201fab7eed4a",
+      "0.0001"
+    ); // TODO: dynamic values
+    setMessage(transferMessage[0].toString());
   };
 
   return (
@@ -19,6 +31,9 @@ export default function Home() {
         </button>
         <button onClick={() => handleGetBalance()} className="rounded">
           Get Balance
+        </button>
+        <button onClick={() => handleTransfer()} className="rounded">
+          Transfer
         </button>
         {message}
       </main>
