@@ -1,6 +1,13 @@
 import Web3 from "web3";
 
-const getMetaMaskProvider = async () => {
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ethereum: any;
+  }
+}
+
+export const getMetaMaskProvider = async () => {
   if (!window.ethereum) {
     throw new Error("MetaMask not found!");
   }
@@ -22,4 +29,8 @@ const getMetaMaskProvider = async () => {
   return web3;
 };
 
-export default getMetaMaskProvider;
+export const getBalance = async (address: string) => {
+  const web3 = await getMetaMaskProvider();
+  const balance = await web3.eth.getBalance(address);
+  return balance;
+};
