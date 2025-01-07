@@ -35,5 +35,25 @@ export const getBalance = async () => {
 
   const balance = await web3.eth.getBalance(accounts[0]);
 
-  return balance;
+  return web3.utils.fromWei(balance, "ether");
+};
+
+export const transfer = async (to: string, quantity: string) => {
+  const web3 = await getMetaMaskProvider();
+  const accounts = await web3.eth.requestAccounts();
+  const from = accounts[0];
+  const value = web3.utils.toWei(quantity, "ether");
+  const nonce = await web3.eth.getTransactionCount(from, "latest");
+
+  const transaction = {
+    from,
+    to,
+    value,
+    gas: 21000,
+    nonce,
+  };
+
+  const tx = await web3.eth.sendTransaction(transaction);
+
+  return tx.transactionHash;
 };
