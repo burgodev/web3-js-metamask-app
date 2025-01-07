@@ -21,8 +21,8 @@ export const getMetaMaskProvider = async () => {
       throw new Error("Permission required!");
     }
 
-    console.log("accounts", accounts);
-  } catch (e) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (e: any) {
     alert(e.message);
   }
 
