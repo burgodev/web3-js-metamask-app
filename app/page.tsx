@@ -24,18 +24,27 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col justify-between items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="flex flex-col justify-between items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-orbitron bg-gradient-to-b from-gray-900 to-black text-white">
       <header className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <h1>Metamask Wallet</h1>
+        <h1 className="text-[48px]">Metamask Wallet</h1>
       </header>
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <button onClick={() => getMetaMaskProvider()} className="rounded">
+        <button
+          onClick={() => getMetaMaskProvider()}
+          className="rounded-lg bg-gradient-to-r from-blue-900 to-blue-500 text-white px-6 py-3 hover:from-blue-800 hover:to-blue-400 transition-all duration-300 shadow-lg hover:shadow-xl"
+        >
           Get MetaMask
         </button>
-        <button onClick={() => handleGetBalance()} className="rounded">
+        <button
+          onClick={() => handleGetBalance()}
+          className="rounded-lg bg-gradient-to-r from-blue-900 to-blue-500 text-white px-6 py-3 hover:from-blue-800 hover:to-blue-400 transition-all duration-300 shadow-lg hover:shadow-xl"
+        >
           Get Balance
         </button>
-        <button onClick={() => handleTransfer()} className="rounded">
+        <button
+          onClick={() => handleTransfer()}
+          className="rounded-lg bg-gradient-to-r from-blue-900 to-blue-500 text-white px-6 py-3 hover:from-blue-800 hover:to-blue-400 transition-all duration-300 shadow-lg hover:shadow-xl"
+        >
           Transfer
         </button>
         {message}
