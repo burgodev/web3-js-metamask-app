@@ -9,7 +9,11 @@ import {
 
 export default function Home() {
   const [message, setMessage] = useState("");
-  const [address, setAddress] = useState<string | undefined>(undefined);
+  const [walletAddress, setWalletAddress] = useState<string | undefined>(
+    undefined
+  );
+  const [fromAddress, setFromAddress] = useState<string>("");
+  const [toAddress, setToAddress] = useState<string>("");
 
   const handleGetBalance = async () => {
     const balance = await getBalance();
@@ -29,7 +33,7 @@ export default function Home() {
 
     const address = await web3.eth.requestAccounts();
 
-    setAddress(address[0]);
+    setWalletAddress(address[0]);
   };
 
   return (
@@ -38,7 +42,7 @@ export default function Home() {
         <h1 className="text-[48px]">Metamask Wallet</h1>
       </header>
       <main className="flex gap-8 row-start-2 items-center sm:items-start">
-        {!address && (
+        {!walletAddress && (
           <button
             onClick={handleLogin}
             className="rounded-lg bg-gradient-to-r from-blue-900 to-blue-500 text-white px-6 py-3 hover:from-blue-800 hover:to-blue-400 transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -46,8 +50,29 @@ export default function Home() {
             Login on MetaMask
           </button>
         )}
-        {address && (
+        {walletAddress && (
           <div className="flex gap-4 items-center">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="fromAddress">From Address</label>
+              <input
+                id="fromAddress"
+                type="text"
+                value={fromAddress}
+                onChange={(e) => setFromAddress(e.target.value)}
+                className="rounded-lg px-4 py-2 text-black"
+                readOnly
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="toAddress">To Address</label>
+              <input
+                id="toAddress"
+                type="text"
+                value={toAddress}
+                onChange={(e) => setToAddress(e.target.value)}
+                className="rounded-lg px-4 py-2 text-black"
+              />
+            </div>
             <div>
               <button
                 onClick={() => handleGetBalance()}
